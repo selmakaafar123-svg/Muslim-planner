@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f5ef">
+<meta name="description" content="NOOR — votre planner quotidien, spirituel et financier.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/noor-192.png">
+<link rel="apple-touch-icon" href="icons/noor-192.png">
+<link rel="stylesheet" href="styles.css">
+<title>NOOR — Daily Planner</title>
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar">
+ <a class="brand" href="#" aria-label="NOOR accueil"><span class="brand-mark">☾</span><span>NOOR</span></a>
+ <div class="top-actions"><span class="today-label" id="todayLabel"></span><select id="languageSelect" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="ar">ع</option></select></div>
+</header>
+<main>
+ <section class="hero">
+  <div><p class="eyebrow" data-i18n="daily_planner">VOTRE PLANNER QUOTIDIEN</p><h1 data-i18n="greeting">Assalamu alaykum 🌿</h1><p class="muted" data-i18n="hero_subtitle">Avancez avec intention, un jour à la fois.</p></div>
+  <div class="hero-progress"><div class="progress-ring" id="progressRing"><span id="progressPercent">0%</span></div><span data-i18n="day_progress">Progression du jour</span></div>
+ </section>
+ <nav class="tabs" aria-label="Navigation">
+  <button class="tab active" data-page="home"><span>⌂</span><b data-i18n="home">Accueil</b></button>
+  <button class="tab" data-page="planner"><span>▦</span><b data-i18n="planner">Planner</b></button>
+  <button class="tab" data-page="habits"><span>✧</span><b data-i18n="habits">Habit Tracker</b></button>
+  <button class="tab" data-page="budget"><span>◈</span><b data-i18n="budget">Budget</b></button>
+  <button class="tab" data-page="spiritual"><span>☾</span><b data-i18n="spirituality">Spiritualité</b></button>
+  <button class="tab" data-page="shopping"><span>♡</span><b data-i18n="shopping">Achats</b></button>
+ </nav>
+
+ <section class="page active" id="page-home">
+  <div class="section-heading"><div><p class="eyebrow" data-i18n="overview">AUJOURD'HUI</p><h2 data-i18n="today_at_glance">Ma journée, heure par heure</h2><p class="muted" id="homeDate"></p></div><button class="outline-button" data-go="planner" data-i18n="open_calendar">Calendrier →</button></div>
+  <div class="summary-grid">
+   <article class="summary-card green"><span class="summary-icon">☾</span><div><strong id="prayerSummary">0/5</strong><small data-i18n="prayers_done">Prières cochées</small></div></article>
+   <article class="summary-card sand"><span class="summary-icon">✧</span><div><strong id="habitSummary">0/0</strong><small data-i18n="habits_done">Habitudes réalisées</small></div></article>
+   <article class="summary-card lavender"><span class="summary-icon">✓</span><div><strong id="taskSummary">0/0</strong><small data-i18n="tasks_done">Tâches terminées</small></div></article>
+  </div>
+  <article class="panel daily-ayah-panel">
+   <div class="panel-heading"><div><p class="eyebrow">AYA DU JOUR · آية اليوم</p><h3 data-i18n="daily_light">Une lumière pour aujourd'hui</h3></div><span class="pill" id="ayahDate"></span></div>
+   <div id="dailyAyah" class="ayah-content"></div>
+   <div class="tafsir-box"><b>Tafsir / تفسير</b><p id="dailyTafsir" class="muted"></p><small id="tafsirSource"></small></div>
+  </article>
+  <article class="panel">
+   <div class="panel-heading"><div><p class="eyebrow" data-i18n="daily_timeline">PROGRAMME DU JOUR</p><h3 data-i18n="my_checklist">Ma liste à cocher</h3></div><button class="text-button" data-go="planner" data-i18n="manage_schedule">Gérer les horaires →</button></div>
+   <div id="dailyTimeline" class="timeline"></div>
+   <form id="quickTaskForm" class="quick-task-form"><input id="quickTaskTitle" required maxlength="120" placeholder="Ajouter une tâche personnelle…"><input id="quickTaskTime" type="time" value="09:00" aria-label="Heure"><button type="submit" data-i18n="add">Ajouter</button></form>
+  </article>
+  <div class="content-grid">
+   <article class="panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="finance_snapshot">FINANCES</p><h3 data-i18n="this_month">Ce mois-ci</h3></div><button class="text-button" data-go="budget">Voir →</button></div><div class="mini-finance"><div><small>Revenus</small><strong id="homeIncome">0 TND</strong></div><div><small>Dépenses</small><strong id="homeExpenses">0 TND</strong></div><div><small>Épargne</small><strong id="homeSavings">0 TND</strong></div></div></article>
+   <article class="panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="quick_access">ACCÈS RAPIDE</p><h3 data-i18n="organize_day">Organiser ma journée</h3></div></div><div class="quick-actions"><button class="quick-action" data-go="planner"><span>＋</span><b data-i18n="add_task">Ajouter une tâche</b></button><button class="quick-action" data-go="habits"><span>✧</span><b data-i18n="my_habits">Mes habitudes</b></button><button class="quick-action" data-go="spiritual"><span>☾</span><b data-i18n="spirituality">Spiritualité</b></button></div></article>
+  </div>
+ </section>
+
+ <section class="page" id="page-planner">
+  <div class="section-heading"><div><p class="eyebrow">PLANIFIER AVEC SÉRÉNITÉ</p><h2 data-i18n="planner_title">Mon calendrier</h2><p class="muted" data-i18n="planner_desc">Organisez vos tâches par année, mois, semaine ou jour.</p></div></div>
+  <article class="panel">
+   <div class="calendar-toolbar"><div class="calendar-nav"><button id="calPrev" class="icon-button">‹</button><button id="calToday" class="text-button" data-i18n="today">Aujourd'hui</button><button id="calNext" class="icon-button">›</button></div><strong id="calendarTitle"></strong><div class="view-switch"><button class="mini-tab" data-calview="year">Année</button><button class="mini-tab active" data-calview="month">Mois</button><button class="mini-tab" data-calview="week">Semaine</button><button class="mini-tab" data-calview="day">Jour</button></div></div>
+   <div id="calendarView" class="calendar-view"></div>
+  </article>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="add_personal_task">Ajouter une tâche personnelle</h3></div>
+   <form id="calendarTaskForm" class="calendar-task-form"><input id="calendarTaskInput" required maxlength="120" placeholder="Nom de la tâche"><input id="calendarTaskDate" type="date" required><input id="calendarTaskTime" type="time" value="09:00" required><select id="calendarTaskPriority"><option value="normal">Normale</option><option value="high">Prioritaire</option></select><button type="submit" data-i18n="add">Ajouter</button></form>
+  </article>
+  <article class="panel"><div class="panel-heading"><h3 id="selectedDayTitle">Tâches de la date sélectionnée</h3></div><div id="selectedDayTasks" class="check-list"></div></article>
+ </section>
+
+ <section class="page" id="page-habits">
+  <div class="section-heading"><div><p class="eyebrow">LES PETITS PAS COMPTENT</p><h2 data-i18n="habit_tracker_title">Habit Tracker</h2><p class="muted" data-i18n="habits_desc">Suivez votre régularité et votre évolution.</p></div></div>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="today_habits">Habitudes du jour</h3><span class="pill" id="habitCount">0/0</span></div><div id="habitList" class="check-list"></div><form id="habitForm" class="add-form"><input id="habitInput" required maxlength="70" placeholder="Nouvelle habitude…"><button type="submit" data-i18n="add">Ajouter</button></form></article>
+  <div class="summary-grid"><article class="summary-card green"><div><strong id="habitRate">0%</strong><small>Régularité aujourd'hui</small></div></article><article class="summary-card sand"><div><strong id="habitWeekRate">0%</strong><small>Cette semaine</small></div></article><article class="summary-card lavender"><div><strong id="habitMonthRate">0%</strong><small>Ce mois</small></div></article></div>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="habit_evolution">Évolution des habitudes</h3><span class="pill">30 jours</span></div><div id="habitHistory" class="history-grid"></div><div class="chart-legend"><span>● Réalisées</span><span>○ Non réalisées</span></div></article>
+ </section>
+
+ <section class="page" id="page-budget">
+  <div class="section-heading"><div><p class="eyebrow">GÉRER SANS STRESS</p><h2 data-i18n="budget_title">Budget Planner</h2><p class="muted" data-i18n="budget_desc">Revenus, dépenses et épargne, jour après jour.</p></div></div>
+  <article class="panel"><div class="budget-month-row"><label for="budgetMonth" data-i18n="month_tracked">Mois suivi</label><input id="budgetMonth" type="month"></div><div class="budget-summary"><div class="budget-card"><small data-i18n="income">Revenus</small><strong id="budgetIncome">0 TND</strong></div><div class="budget-card"><small data-i18n="expenses">Dépenses</small><strong id="budgetExpenses">0 TND</strong></div><div class="budget-card balance"><small data-i18n="savings">Épargne / solde</small><strong id="budgetSavings">0 TND</strong></div></div>
+   <div class="budget-limit"><label for="monthlyLimit" data-i18n="monthly_limit">Objectif de dépenses mensuel</label><div class="limit-input"><input id="monthlyLimit" type="number" min="0" step="0.001" placeholder="Ex. 800"><select id="budgetCurrency"><option>TND</option><option>EUR</option><option>USD</option></select><button id="saveBudgetLimit" class="outline-button" type="button" data-i18n="save">Enregistrer</button></div><div class="budget-progress"><i id="budgetProgressBar"></i></div><small id="budgetProgressText" class="muted"></small></div>
+  </article>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="spending_calendar">Calendrier des dépenses</h3><span class="pill" id="budgetDayTotal">0 TND</span></div><div id="budgetCalendar" class="budget-calendar"></div><p class="hint" id="budgetSelectedDate"></p></article>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="monthly_analysis">Analyse mensuelle</h3></div><div id="budgetCategoryChart" class="category-chart"></div><div class="budget-insight" id="budgetInsight"></div></article>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="add_transaction">Ajouter une opération</h3></div><form id="budgetForm" class="budget-form"><select id="budgetType"><option value="expense">Dépense</option><option value="income">Revenu</option></select><input id="budgetAmount" type="number" min="0.001" step="0.001" required placeholder="Montant"><select id="budgetCategory"><option>Alimentation</option><option>Transport</option><option>Logement</option><option>Santé</option><option>Shopping</option><option>Études</option><option>Loisirs</option><option>Factures</option><option>Salaire</option><option>Autre</option></select><input id="budgetDate" type="date" required><input id="budgetNote" maxlength="80" placeholder="Note (facultatif)"><button type="submit" data-i18n="add">Ajouter</button></form></article>
+  <article class="panel"><div class="panel-heading"><h3 data-i18n="my_transactions">Historique des opérations</h3><span class="pill" id="budgetCount">0</span></div><div id="budgetTransactions" class="check-list"></div><p id="budgetEmpty" class="empty-state">Aucune opération pour ce mois.</p></article>
+ </section>
+
+ <section class="page" id="page-spiritual">
+  <div class="section-heading"><div><p class="eyebrow">الجانب الروحي</p><h2 data-i18n="spiritual_title">Ma spiritualité</h2><p class="muted" data-i18n="spiritual_desc">Nourrissez votre foi avec la lecture et le rappel.</p></div></div>
+  <div class="spiritual-tabs"><button class="mini-tab active" data-spiritual="quran">Coran</button><button class="mini-tab" data-spiritual="duas">Douas</button><button class="mini-tab" data-spiritual="adhkar">Adhkar</button><button class="mini-tab" data-spiritual="hadith">Hadith</button></div>
+  <div id="spiritual-quran" class="spiritual-section">
+   <article class="panel"><div class="panel-heading"><div><p class="eyebrow">القرآن الكريم</p><h3>Lire le Coran</h3></div><span class="pill">114 sourates</span></div><div class="quran-controls"><select id="surahSelect" aria-label="Choisir une sourate"></select><select id="translationSelect" aria-label="Traduction"><option value="fr">Français</option><option value="en">English</option></select><button id="loadSurah" class="outline-button" type="button">Lire</button></div><p class="hint" id="quranStatus">Les sourates consultées peuvent être conservées sur cet appareil pour une lecture hors ligne.</p><div id="quranReader" class="quran-reader"><p class="muted">Choisissez une sourate puis appuyez sur Lire.</p></div><div class="reading-progress"><span id="quranProgress">Progression : 0 sourate consultée</span></div></article>
+  </div>
+  <div id="spiritual-duas" class="spiritual-section hidden"><article class="panel"><h3>Douas · أدعية</h3><div id="duaLibrary" class="library-list"></div></article></div>
+  <div id="spiritual-adhkar" class="spiritual-section hidden"><article class="panel"><h3>Adhkar · أذكار</h3><div class="adhkar-filters"><button class="mini-tab active" data-adhkar-filter="all">Tous</button><button class="mini-tab" data-adhkar-filter="morning">Matin</button><button class="mini-tab" data-adhkar-filter="evening">Soir</button><button class="mini-tab" data-adhkar-filter="after">Après prière</button></div><div id="adhkarLibrary" class="library-list"></div></article></div>
+  <div id="spiritual-hadith" class="spiritual-section hidden"><article class="panel"><h3>Hadith · حديث</h3><div id="hadithLibrary" class="library-list"></div></article></div>
+ </section>
+
+ <section class="page" id="page-shopping">
+  <div class="section-heading"><div><p class="eyebrow">N'OUBLIEZ RIEN</p><h2 data-i18n="shopping_title">Ma liste d'achats</h2><p class="muted" data-i18n="shopping_desc">Gardez vos achats organisés au même endroit.</p></div></div>
+  <article class="panel"><form id="shoppingForm" class="add-form"><input id="shoppingInput" required maxlength="80" placeholder="Ajouter un article…"><button type="submit" data-i18n="add">Ajouter</button></form><div class="filter-row"><span data-i18n="to_buy">À acheter</span><button class="text-button" id="clearBought" data-i18n="clear_bought">Effacer les articles cochés</button></div><div id="shoppingList" class="check-list"></div><p class="empty-state" id="shoppingEmpty">Votre liste est vide.</p></article>
+ </section>
+</main>
+<footer><span>☾ NOOR</span><span data-i18n="footer">Avancez avec foi et intention.</span><button id="exportData" class="text-button" data-i18n="export_data">Exporter mes données</button></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
